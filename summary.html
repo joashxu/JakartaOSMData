@@ -197,7 +197,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Overview">Overview<a class="anchor-link" href="#Overview">&#182;</a></h2><p>After downloading the map data of Jakarta, I do some initial checking on the document.</p>
+<h2 id="Overview">Overview<a class="anchor-link" href="#Overview">&#182;</a></h2><p>After downloading the map data of Jakarta, I do some initial checking on the document manually.
+I then run some code to get the feel of the data.</p>
 
 </div>
 </div>
@@ -259,7 +260,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>OSM allow a very flexible tag system, which gives user a bit of freedom but causing problem with consistency.
+<p>OSM allows a very flexible tagging system, which gives user freedom but causing problem with consistency.
 I count the number of for all tag in the document.</p>
 
 </div>
@@ -271,7 +272,30 @@ I count the number of for all tag in the document.</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Check the tag key and element</span>
-<span class="n">osm_data</span><span class="o">.</span><span class="n">get_tag_keys</span><span class="p">()</span>
+<span class="n">tag_keys</span> <span class="o">=</span> <span class="n">osm_data</span><span class="o">.</span><span class="n">get_tag_keys</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below I list the top 20 tag keys. As the whole list will be too exhaustive to read.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="nb">sorted</span><span class="p">(</span><span class="n">tag_keys</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -282,797 +306,30 @@ I count the number of for all tag in the document.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[(&apos;1&apos;, 2),
- (&apos;ALAMAT&apos;, 2),
- (&apos;BABAKAN&apos;, 2),
- (&apos;CIKEAS&apos;, 2),
- (&apos;Company&apos;, 2),
- (&apos;FIXME&apos;, 39),
- (&apos;FLOODPRONE&apos;, 27),
- (&apos;Gedung Fasilitas Remaja&apos;, 2),
- (&apos;Gerbang Bukit Pelangi&apos;, 2),
- (&apos;ID&apos;, 2),
- (&apos;ISO3166-1&apos;, 2),
- (&apos;ISO3166-1:alpha2&apos;, 2),
- (&apos;ISO3166-1:alpha3&apos;, 2),
- (&apos;ISO3166-1:numeric&apos;, 2),
- (&apos;ISO3166-2&apos;, 6),
- (&apos;Id&apos;, 882),
- (&apos;JENIS&apos;, 2),
- (&apos;Jalan&apos;, 2),
- (&apos;Jenis&apos;, 4),
- (&apos;Jenis Atap&apos;, 2),
- (&apos;Jenis Tembok&apos;, 2),
- (&apos;KAB_NAME&apos;, 28),
- (&apos;KEC_NAME&apos;, 29),
- (&apos;KEL_NAME&apos;, 29),
- (&apos;KODE&apos;, 2),
- (&apos;Kab.&apos;, 2),
- (&apos;Kabupaten&apos;, 2),
- (&apos;Kereta Api&apos;, 2),
- (&apos;Keterangan&apos;, 2),
- (&apos;Latitude&apos;, 2),
- (&apos;Longitude&apos;, 2),
- (&apos;NAMA&apos;, 2),
- (&apos;NMR&apos;, 2),
- (&apos;Nama&apos;, 92),
- (&apos;Name&apos;, 2),
- (&apos;Note&apos;, 20),
- (&apos;OBJECTID&apos;, 3716),
- (&apos;Propinsi&apos;, 2),
- (&apos;Province&apos;, 2),
- (&apos;RT&apos;, 2),
- (&apos;RW&apos;, 53),
- (&apos;Region&apos;, 2),
- (&apos;Render&apos;, 2),
- (&apos;SDN&apos;, 4),
- (&apos;SDT&apos;, 2),
- (&apos;SLTA_&apos;, 2),
- (&apos;SLTA_ID&apos;, 2),
- (&apos;SMU_&apos;, 2),
- (&apos;SMU_ID&apos;, 2),
- (&apos;School Building&apos;, 2),
- (&apos;Struktur&apos;, 2),
- (&apos;Sukaraja&apos;, 2),
- (&apos;TINGKAT&apos;, 2),
- (&apos;Taman&apos;, 2),
- (&apos;Use&apos;, 4),
- (&apos;access&apos;, 818),
- (&apos;access:roof&apos;, 9108),
- (&apos;addr:city&apos;, 1057),
- (&apos;addr:country&apos;, 52),
- (&apos;addr:county&apos;, 2),
- (&apos;addr:district&apos;, 26),
- (&apos;addr:floor&apos;, 4),
- (&apos;addr:full&apos;, 10038),
- (&apos;addr:housename&apos;, 492),
- (&apos;addr:housenumber&apos;, 1475),
- (&apos;addr:housenumber_1&apos;, 2),
- (&apos;addr:interpolation&apos;, 16),
- (&apos;addr:place&apos;, 2),
- (&apos;addr:postcode&apos;, 858),
- (&apos;addr:province&apos;, 30),
- (&apos;addr:state&apos;, 4),
- (&apos;addr:street&apos;, 1441),
- (&apos;addr:subdistrict&apos;, 20),
- (&apos;addr:suburb&apos;, 22),
- (&apos;admin_leve&apos;, 2),
- (&apos;admin_level&apos;, 17723),
- (&apos;aerialway&apos;, 18),
- (&apos;aerodrome&apos;, 2),
- (&apos;aeroway&apos;, 337),
- (&apos;affected&apos;, 2),
- (&apos;agritourism&apos;, 10),
- (&apos;alamat&apos;, 2),
- (&apos;alt_name&apos;, 161),
- (&apos;alt_name:en&apos;, 2),
- (&apos;amenity&apos;, 24781),
- (&apos;amenity_1&apos;, 2),
- (&apos;aquaculture&apos;, 10),
- (&apos;area&apos;, 6439),
- (&apos;atap&apos;, 2),
- (&apos;atm&apos;, 204),
- (&apos;attribution&apos;, 2),
- (&apos;automated&apos;, 4),
- (&apos;backrest&apos;, 2),
- (&apos;barrier&apos;, 1134),
- (&apos;beer_garden&apos;, 2),
- (&apos;bench&apos;, 41),
- (&apos;bicycle&apos;, 2513),
- (&apos;bicycle_parking&apos;, 2),
- (&apos;bicycle_road&apos;, 13),
- (&apos;biodiesel&apos;, 4),
- (&apos;boat&apos;, 148),
- (&apos;border_type&apos;, 2),
- (&apos;boundary&apos;, 15606),
- (&apos;brand&apos;, 192),
- (&apos;bridge&apos;, 2686),
- (&apos;bridge_name&apos;, 2),
- (&apos;building&apos;, 557134),
- (&apos;building function&apos;, 238),
- (&apos;building.source:roof&apos;, 2),
- (&apos;building:condition&apos;, 717),
- (&apos;building:level&apos;, 6),
- (&apos;building:levels&apos;, 25345),
- (&apos;building:material&apos;, 4),
- (&apos;building:roof&apos;, 25059),
- (&apos;building:structure&apos;, 24658),
- (&apos;building:type&apos;, 2),
- (&apos;building:use&apos;, 15113),
- (&apos;building:walls&apos;, 25051),
- (&apos;bus&apos;, 18),
- (&apos;bus_station&apos;, 4),
- (&apos;busway&apos;, 18),
- (&apos;busway:right&apos;, 8),
- (&apos;cables&apos;, 216),
- (&apos;capacity&apos;, 151),
- (&apos;capacity:disabled&apos;, 2),
- (&apos;capacity:parent&apos;, 2),
- (&apos;capacity:persons&apos;, 7133),
- (&apos;capacity:women&apos;, 2),
- (&apos;capital&apos;, 2),
- (&apos;cargo&apos;, 4),
- (&apos;category&apos;, 4),
- (&apos;church&apos;, 4),
- (&apos;colour&apos;, 39),
- (&apos;comment&apos;, 2),
- (&apos;communication&apos;, 6),
- (&apos;construction&apos;, 8),
- (&apos;contact:email&apos;, 8),
- (&apos;contact:fax&apos;, 4),
- (&apos;contact:phone&apos;, 8),
- (&apos;contact:website&apos;, 4),
- (&apos;corridor1&apos;, 66),
- (&apos;corridor10&apos;, 53),
- (&apos;corridor11&apos;, 44),
- (&apos;corridor12&apos;, 70),
- (&apos;corridor2&apos;, 62),
- (&apos;corridor3&apos;, 44),
- (&apos;corridor4&apos;, 37),
- (&apos;corridor5&apos;, 52),
- (&apos;corridor6&apos;, 45),
- (&apos;corridor7&apos;, 40),
- (&apos;corridor8&apos;, 53),
- (&apos;corridor9&apos;, 70),
- (&apos;country&apos;, 75),
- (&apos;covered&apos;, 44),
- (&apos;craft&apos;, 8),
- (&apos;created_by&apos;, 84423),
- (&apos;crop&apos;, 298),
- (&apos;crossing&apos;, 70),
- (&apos;crossing_ref&apos;, 30),
- (&apos;cuisine&apos;, 414),
- (&apos;cutting&apos;, 22),
- (&apos;cycleway&apos;, 104),
- (&apos;cycleway:left&apos;, 6),
- (&apos;date&apos;, 2),
- (&apos;delivery&apos;, 20),
- (&apos;denomination&apos;, 149),
- (&apos;dept.geografi&apos;, 2),
- (&apos;description&apos;, 48),
- (&apos;description:en&apos;, 2),
- (&apos;description:fr&apos;, 2),
- (&apos;description:id&apos;, 2),
- (&apos;designation&apos;, 130),
- (&apos;diesel&apos;, 8),
- (&apos;diplomatic&apos;, 2),
- (&apos;direction&apos;, 9),
- (&apos;dispensing&apos;, 47),
- (&apos;display&apos;, 2),
- (&apos;display:digital&apos;, 2),
- (&apos;disused&apos;, 4),
- (&apos;drive_through&apos;, 2),
- (&apos;ele&apos;, 14),
- (&apos;electrified&apos;, 132),
- (&apos;email&apos;, 10),
- (&apos;embankment&apos;, 23),
- (&apos;emergency&apos;, 126),
- (&apos;entrance&apos;, 6),
- (&apos;evacuation_center&apos;, 5590),
- (&apos;evacuation_route&apos;, 9280),
- (&apos;exit_to&apos;, 6),
- (&apos;facebook&apos;, 2),
- (&apos;fax&apos;, 8),
- (&apos;fee&apos;, 93),
- (&apos;fire_hazard&apos;, 9432),
- (&apos;fire_hydrant:type&apos;, 2),
- (&apos;fixme&apos;, 206),
- (&apos;flag&apos;, 2),
- (&apos;flood:overflow&apos;, 2619),
- (&apos;flood:rain&apos;, 4859),
- (&apos;flood:rob&apos;, 1049),
- (&apos;flood:send&apos;, 3362),
- (&apos;flood_cause:overflowing_river&apos;, 2),
- (&apos;flood_depth&apos;, 5860),
- (&apos;flood_duration&apos;, 5696),
- (&apos;flood_latest&apos;, 5845),
- (&apos;flood_prone&apos;, 21051),
- (&apos;floodprone&apos;, 19),
- (&apos;food&apos;, 2),
- (&apos;foot&apos;, 2701),
- (&apos;footway&apos;, 6),
- (&apos;ford&apos;, 32),
- (&apos;forward&apos;, 2),
- (&apos;frequency&apos;, 24),
- (&apos;from&apos;, 32),
- (&apos;fuel:GTL_diesel&apos;, 6),
- (&apos;fuel:HGV_diesel&apos;, 4),
- (&apos;fuel:biodiesel&apos;, 29),
- (&apos;fuel:biogas&apos;, 2),
- (&apos;fuel:cng&apos;, 2),
- (&apos;fuel:diesel&apos;, 98),
- (&apos;fuel:diesel_1&apos;, 6),
- (&apos;fuel:e10&apos;, 2),
- (&apos;fuel:e85&apos;, 2),
- (&apos;fuel:electricity&apos;, 2),
- (&apos;fuel:lpg&apos;, 10),
- (&apos;fuel:octane_100&apos;, 7),
- (&apos;fuel:octane_80&apos;, 19),
- (&apos;fuel:octane_88&apos;, 10),
- (&apos;fuel:octane_91&apos;, 27),
- (&apos;fuel:octane_92&apos;, 74),
- (&apos;fuel:octane_95&apos;, 90),
- (&apos;fuel:octane_98&apos;, 17),
- (&apos;function&apos;, 2),
- (&apos;fungsi&apos;, 60),
- (&apos;gas station&apos;, 2),
- (&apos;gauge&apos;, 141),
- (&apos;generator:method&apos;, 8),
- (&apos;generator:output:electricity&apos;, 6),
- (&apos;generator:source&apos;, 10),
- (&apos;genus&apos;, 30),
- (&apos;geography&apos;, 2),
- (&apos;geological&apos;, 2),
- (&apos;gns:dsg&apos;, 256),
- (&apos;golf&apos;, 116),
- (&apos;golf:course&apos;, 6),
- (&apos;golf:par&apos;, 2),
- (&apos;golf_cart&apos;, 6),
- (&apos;grassland&apos;, 2),
- (&apos;greenspace&apos;, 8),
- (&apos;healthcare&apos;, 2),
+<pre>[(&apos;building&apos;, 557134),
  (&apos;highway&apos;, 124402),
- (&apos;hiking&apos;, 2),
- (&apos;historic&apos;, 122),
- (&apos;history&apos;, 10),
- (&apos;horse&apos;, 253),
- (&apos;hospital:type_idn&apos;, 7),
- (&apos;hot:mahkamah&apos;, 2),
- (&apos;house&apos;, 2),
- (&apos;iata&apos;, 10),
- (&apos;icao&apos;, 8),
- (&apos;icon_sails&apos;, 52),
- (&apos;id&apos;, 35),
- (&apos;iescd&apos;, 31),
- (&apos;incline&apos;, 20),
- (&apos;indoor&apos;, 2),
- (&apos;industrial&apos;, 214),
- (&apos;information&apos;, 36),
- (&apos;int_name&apos;, 62),
- (&apos;internet_access&apos;, 166),
- (&apos;internet_access:fee&apos;, 88),
- (&apos;iof&apos;, 5),
- (&apos;is_in&apos;, 8),
- (&apos;is_in:city&apos;, 38),
- (&apos;is_in:continent&apos;, 2),
- (&apos;is_in:country&apos;, 2686),
- (&apos;is_in:country_code&apos;, 307),
- (&apos;is_in:county&apos;, 2353),
- (&apos;is_in:district&apos;, 5294),
- (&apos;is_in:hamlet&apos;, 5302),
- (&apos;is_in:island&apos;, 2),
- (&apos;is_in:ocean&apos;, 2),
- (&apos;is_in:province&apos;, 5322),
- (&apos;is_in:region&apos;, 2353),
- (&apos;is_in:state&apos;, 2583),
- (&apos;is_in:subdistrict&apos;, 5279),
- (&apos;is_in:town&apos;, 16),
- (&apos;j_kk&apos;, 56),
- (&apos;jalan asmin&apos;, 2),
- (&apos;jenjang&apos;, 116),
- (&apos;jl_lantai&apos;, 20),
- (&apos;junction&apos;, 182),
- (&apos;kab_name&apos;, 10015),
- (&apos;kapasitas&apos;, 4),
- (&apos;kebanjiran tahun 2007&apos;, 1),
- (&apos;kec_name&apos;, 10004),
- (&apos;kel_name&apos;, 9992),
- (&apos;kerb&apos;, 2),
- (&apos;key&apos;, 2),
- (&apos;kitchen:facilities&apos;, 991),
- (&apos;label&apos;, 218),
- (&apos;landmark&apos;, 14),
- (&apos;landuse&apos;, 12296),
- (&apos;lanes&apos;, 1713),
- (&apos;lapangan&apos;, 2),
- (&apos;layer&apos;, 2910),
- (&apos;leaf_cycle&apos;, 58),
- (&apos;leaf_type&apos;, 70),
- (&apos;leisure&apos;, 3883),
- (&apos;length&apos;, 2),
- (&apos;level&apos;, 43),
- (&apos;levels&apos;, 2),
- (&apos;line&apos;, 33),
- (&apos;lit&apos;, 97),
- (&apos;local_ref&apos;, 4),
- (&apos;localroutes&apos;, 2),
- (&apos;location&apos;, 37),
- (&apos;luas wilayah&apos;, 2),
- (&apos;man_made&apos;, 485),
- (&apos;maritime&apos;, 7),
- (&apos;material&apos;, 2),
- (&apos;material rumah&apos;, 2),
- (&apos;maxspeed&apos;, 1621),
- (&apos;maxweight&apos;, 17),
- (&apos;microbrewery&apos;, 6),
- (&apos;milik&apos;, 34),
- (&apos;military&apos;, 49),
- (&apos;monitoring:seismic&apos;, 2),
- (&apos;mooring&apos;, 12),
- (&apos;mosque&apos;, 2),
- (&apos;motor_vehicle&apos;, 390),
- (&apos;motorcar&apos;, 20),
- (&apos;motorcycle&apos;, 193),
- (&apos;motorroad&apos;, 61),
- (&apos;mtb:scale&apos;, 6),
- (&apos;music&apos;, 2),
- (&apos;na&apos;, 6),
- (&apos;nama&apos;, 28),
- (&apos;nama lurah&apos;, 2),
+ (&apos;created_by&apos;, 84423),
  (&apos;name&apos;, 79005),
- (&apos;name:ace&apos;, 2),
- (&apos;name:af&apos;, 4),
- (&apos;name:ak&apos;, 2),
- (&apos;name:als&apos;, 2),
- (&apos;name:am&apos;, 4),
- (&apos;name:an&apos;, 2),
- (&apos;name:ang&apos;, 2),
- (&apos;name:ar&apos;, 4),
- (&apos;name:arz&apos;, 4),
- (&apos;name:ast&apos;, 2),
- (&apos;name:ay&apos;, 2),
- (&apos;name:az&apos;, 4),
- (&apos;name:ba&apos;, 4),
- (&apos;name:bar&apos;, 2),
- (&apos;name:bat-smg&apos;, 4),
- (&apos;name:bcl&apos;, 2),
- (&apos;name:be&apos;, 4),
- (&apos;name:be-x-old&apos;, 4),
- (&apos;name:bg&apos;, 4),
- (&apos;name:bi&apos;, 2),
- (&apos;name:bjn&apos;, 2),
- (&apos;name:bn&apos;, 4),
- (&apos;name:bo&apos;, 4),
- (&apos;name:botanical&apos;, 20),
- (&apos;name:bpy&apos;, 2),
- (&apos;name:br&apos;, 2),
- (&apos;name:bs&apos;, 4),
- (&apos;name:bug&apos;, 2),
- (&apos;name:bxr&apos;, 2),
- (&apos;name:ca&apos;, 2),
- (&apos;name:cbk-zam&apos;, 2),
- (&apos;name:ce&apos;, 2),
- (&apos;name:ceb&apos;, 2),
- (&apos;name:ch&apos;, 2),
- (&apos;name:chr&apos;, 2),
- (&apos;name:ckb&apos;, 4),
- (&apos;name:co&apos;, 2),
- (&apos;name:crh&apos;, 2),
- (&apos;name:cs&apos;, 2),
- (&apos;name:csb&apos;, 2),
- (&apos;name:cu&apos;, 2),
- (&apos;name:cv&apos;, 2),
- (&apos;name:cy&apos;, 2),
- (&apos;name:da&apos;, 2),
- (&apos;name:de&apos;, 6),
- (&apos;name:diq&apos;, 2),
- (&apos;name:dsb&apos;, 2),
- (&apos;name:dv&apos;, 2),
- (&apos;name:el&apos;, 4),
- (&apos;name:en&apos;, 118),
- (&apos;name:eo&apos;, 4),
- (&apos;name:es&apos;, 6),
- (&apos;name:et&apos;, 2),
- (&apos;name:eu&apos;, 2),
- (&apos;name:ext&apos;, 2),
- (&apos;name:fa&apos;, 4),
- (&apos;name:fi&apos;, 2),
- (&apos;name:fiu-vro&apos;, 2),
- (&apos;name:fo&apos;, 2),
- (&apos;name:fr&apos;, 6),
- (&apos;name:frp&apos;, 2),
- (&apos;name:frr&apos;, 2),
- (&apos;name:fy&apos;, 2),
- (&apos;name:ga&apos;, 4),
- (&apos;name:gag&apos;, 2),
- (&apos;name:gan&apos;, 2),
- (&apos;name:gd&apos;, 2),
- (&apos;name:gl&apos;, 4),
- (&apos;name:gn&apos;, 2),
- (&apos;name:gu&apos;, 4),
- (&apos;name:gv&apos;, 2),
- (&apos;name:hak&apos;, 4),
- (&apos;name:haw&apos;, 2),
- (&apos;name:he&apos;, 4),
- (&apos;name:hi&apos;, 6),
- (&apos;name:hif&apos;, 2),
- (&apos;name:hr&apos;, 2),
- (&apos;name:hsb&apos;, 2),
- (&apos;name:ht&apos;, 2),
- (&apos;name:hu&apos;, 2),
- (&apos;name:hy&apos;, 4),
- (&apos;name:ia&apos;, 2),
- (&apos;name:id&apos;, 138),
- (&apos;name:ie&apos;, 2),
- (&apos;name:ilo&apos;, 2),
- (&apos;name:indonesia&apos;, 2),
- (&apos;name:io&apos;, 2),
- (&apos;name:is&apos;, 4),
- (&apos;name:it&apos;, 4),
- (&apos;name:iu&apos;, 2),
- (&apos;name:ja&apos;, 12),
- (&apos;name:jbo&apos;, 4),
- (&apos;name:jv&apos;, 2),
- (&apos;name:ka&apos;, 4),
- (&apos;name:kbd&apos;, 2),
- (&apos;name:ki&apos;, 2),
- (&apos;name:kk&apos;, 4),
- (&apos;name:kl&apos;, 2),
- (&apos;name:km&apos;, 4),
- (&apos;name:kn&apos;, 6),
- (&apos;name:ko&apos;, 4),
- (&apos;name:ku&apos;, 4),
- (&apos;name:kv&apos;, 2),
- (&apos;name:kw&apos;, 2),
- (&apos;name:ky&apos;, 2),
- (&apos;name:la&apos;, 2),
- (&apos;name:lb&apos;, 2),
- (&apos;name:lez&apos;, 2),
- (&apos;name:li&apos;, 2),
- (&apos;name:lij&apos;, 2),
- (&apos;name:lmo&apos;, 4),
- (&apos;name:ln&apos;, 2),
- (&apos;name:lt&apos;, 4),
- (&apos;name:lv&apos;, 4),
- (&apos;name:map-bms&apos;, 4),
- (&apos;name:mg&apos;, 2),
- (&apos;name:mhr&apos;, 4),
- (&apos;name:mi&apos;, 2),
- (&apos;name:min&apos;, 2),
- (&apos;name:mk&apos;, 4),
- (&apos;name:ml&apos;, 4),
- (&apos;name:mn&apos;, 4),
- (&apos;name:mr&apos;, 4),
- (&apos;name:mrj&apos;, 2),
- (&apos;name:ms&apos;, 2),
- (&apos;name:mt&apos;, 2),
- (&apos;name:mwl&apos;, 2),
- (&apos;name:my&apos;, 4),
- (&apos;name:mzn&apos;, 4),
- (&apos;name:na&apos;, 2),
- (&apos;name:nah&apos;, 4),
- (&apos;name:nap&apos;, 2),
- (&apos;name:nds&apos;, 2),
- (&apos;name:nds-nl&apos;, 2),
- (&apos;name:ne&apos;, 2),
- (&apos;name:new&apos;, 2),
- (&apos;name:nl&apos;, 22),
- (&apos;name:nn&apos;, 2),
- (&apos;name:no&apos;, 2),
- (&apos;name:nov&apos;, 2),
- (&apos;name:nv&apos;, 2),
- (&apos;name:oc&apos;, 2),
- (&apos;name:om&apos;, 2),
- (&apos;name:or&apos;, 2),
- (&apos;name:os&apos;, 4),
- (&apos;name:pa&apos;, 2),
- (&apos;name:pag&apos;, 2),
- (&apos;name:pam&apos;, 2),
- (&apos;name:pap&apos;, 2),
- (&apos;name:pih&apos;, 2),
- (&apos;name:pl&apos;, 4),
- (&apos;name:pms&apos;, 4),
- (&apos;name:pnb&apos;, 4),
- (&apos;name:ps&apos;, 4),
- (&apos;name:pt&apos;, 4),
- (&apos;name:qu&apos;, 2),
- (&apos;name:rm&apos;, 2),
- (&apos;name:ro&apos;, 2),
- (&apos;name:roa-tara&apos;, 4),
- (&apos;name:ru&apos;, 10),
- (&apos;name:rue&apos;, 4),
- (&apos;name:rw&apos;, 2),
- (&apos;name:sa&apos;, 4),
- (&apos;name:sah&apos;, 4),
- (&apos;name:scn&apos;, 2),
- (&apos;name:sco&apos;, 2),
- (&apos;name:se&apos;, 2),
- (&apos;name:sg&apos;, 2),
- (&apos;name:sh&apos;, 4),
- (&apos;name:si&apos;, 2),
- (&apos;name:simple&apos;, 2),
- (&apos;name:sk&apos;, 6),
- (&apos;name:sl&apos;, 4),
- (&apos;name:sm&apos;, 2),
- (&apos;name:so&apos;, 2),
- (&apos;name:sq&apos;, 4),
- (&apos;name:sr&apos;, 4),
- (&apos;name:srn&apos;, 2),
- (&apos;name:ss&apos;, 2),
- (&apos;name:stq&apos;, 2),
- (&apos;name:su&apos;, 2),
- (&apos;name:sv&apos;, 6),
- (&apos;name:sw&apos;, 2),
- (&apos;name:szl&apos;, 4),
- (&apos;name:ta&apos;, 4),
- (&apos;name:te&apos;, 4),
- (&apos;name:tet&apos;, 2),
- (&apos;name:tg&apos;, 2),
- (&apos;name:th&apos;, 4),
- (&apos;name:tk&apos;, 2),
- (&apos;name:tl&apos;, 2),
- (&apos;name:tpi&apos;, 2),
- (&apos;name:tr&apos;, 4),
- (&apos;name:tt&apos;, 2),
- (&apos;name:tzl&apos;, 2),
- (&apos;name:udm&apos;, 2),
- (&apos;name:ug&apos;, 4),
- (&apos;name:uk&apos;, 8),
- (&apos;name:ur&apos;, 4),
- (&apos;name:uz&apos;, 2),
- (&apos;name:vec&apos;, 4),
- (&apos;name:vep&apos;, 2),
- (&apos;name:vi&apos;, 2),
- (&apos;name:vo&apos;, 2),
- (&apos;name:wa&apos;, 2),
- (&apos;name:war&apos;, 2),
- (&apos;name:wo&apos;, 2),
- (&apos;name:wuu&apos;, 2),
- (&apos;name:xal&apos;, 2),
- (&apos;name:yi&apos;, 4),
- (&apos;name:yo&apos;, 2),
- (&apos;name:za&apos;, 4),
- (&apos;name:zea&apos;, 2),
- (&apos;name:zh&apos;, 10),
- (&apos;name:zh-classical&apos;, 2),
- (&apos;name:zh-min-nan&apos;, 2),
- (&apos;name:zh-yue&apos;, 4),
- (&apos;name_1&apos;, 2),
- (&apos;name_admin_8&apos;, 23),
- (&apos;name_admin_9&apos;, 55),
- (&apos;name_id&apos;, 2),
- (&apos;name_int&apos;, 1),
- (&apos;natural&apos;, 19025),
- (&apos;network&apos;, 46),
- (&apos;no&apos;, 2),
- (&apos;no_id&apos;, 725),
- (&apos;noexit&apos;, 30),
- (&apos;note&apos;, 865),
- (&apos;note:oneway&apos;, 4),
- (&apos;note:source&apos;, 39),
- (&apos;note:wikipedia&apos;, 2),
- (&apos;notes&apos;, 2),
- (&apos;nspn&apos;, 31),
- (&apos;octane_95&apos;, 8),
- (&apos;office&apos;, 2915),
- (&apos;official_name&apos;, 2),
- (&apos;old_name&apos;, 18),
- (&apos;oneway&apos;, 12414),
- (&apos;oneway:conditional&apos;, 3),
- (&apos;opening_hours&apos;, 675),
- (&apos;operator&apos;, 911),
- (&apos;operator:type&apos;, 726),
- (&apos;organic&apos;, 4),
- (&apos;osm_id&apos;, 88),
- (&apos;outdoor_seating&apos;, 16),
- (&apos;owner&apos;, 2),
- (&apos;owner_1&apos;, 2),
- (&apos;p&apos;, 2),
- (&apos;park_ride&apos;, 13),
- (&apos;parking&apos;, 702),
- (&apos;parts&apos;, 2),
- (&apos;pasar&apos;, 2),
- (&apos;passing_places&apos;, 2),
- (&apos;path&apos;, 4),
- (&apos;payment:bitcoin&apos;, 14),
- (&apos;payment:cash&apos;, 4),
- (&apos;payment:coins&apos;, 8),
- (&apos;payment:girocard&apos;, 2),
- (&apos;payment:laser&apos;, 2),
- (&apos;payment:litecoin&apos;, 2),
- (&apos;payment:maestro&apos;, 4),
- (&apos;payment:mastercard&apos;, 4),
- (&apos;payment:visa&apos;, 4),
- (&apos;payment:visa_debit&apos;, 4),
- (&apos;payment:visa_electron&apos;, 4),
- (&apos;pekerjaan&apos;, 2),
- (&apos;penduduk&apos;, 2),
- (&apos;petarakyat&apos;, 179),
- (&apos;phone&apos;, 208),
- (&apos;phone2&apos;, 2),
- (&apos;phone_1&apos;, 2),
- (&apos;place&apos;, 2734),
- (&apos;plant:output:electricity&apos;, 2),
- (&apos;platforms&apos;, 2),
- (&apos;pond&apos;, 2),
- (&apos;population&apos;, 6),
- (&apos;postal_code&apos;, 2),
- (&apos;power&apos;, 3689),
- (&apos;produce&apos;, 47),
- (&apos;psv&apos;, 119),
- (&apos;public_building&apos;, 4),
- (&apos;public_transport&apos;, 29),
- (&apos;pump_house&apos;, 125),
- (&apos;railway&apos;, 977),
- (&apos;recording:automated&apos;, 2),
- (&apos;recycling:aluminium&apos;, 2),
- (&apos;recycling:batteries&apos;, 2),
- (&apos;recycling:cans&apos;, 2),
- (&apos;recycling:clothes&apos;, 2),
- (&apos;recycling:glass&apos;, 2),
- (&apos;recycling:paper&apos;, 2),
- (&apos;recycling_type&apos;, 2),
- (&apos;ref&apos;, 2250),
- (&apos;ref:lukr:DAGS_LEIDR&apos;, 2),
- (&apos;religion&apos;, 9380),
- (&apos;render&apos;, 362),
- (&apos;rental&apos;, 2),
- (&apos;repair&apos;, 4),
- (&apos;restriction&apos;, 128),
- (&apos;road&apos;, 20),
- (&apos;roof:access&apos;, 2),
- (&apos;roof:colour&apos;, 2),
- (&apos;roof:material&apos;, 2),
- (&apos;roof:shape&apos;, 2),
- (&apos;roof:type&apos;, 4),
- (&apos;rooms&apos;, 345),
- (&apos;roundtrip&apos;, 2),
- (&apos;route&apos;, 226),
- (&apos;route_master&apos;, 4),
- (&apos;rt_number&apos;, 9957),
- (&apos;rumah&apos;, 2),
- (&apos;rw_number&apos;, 9959),
- (&apos;sac_scale&apos;, 4),
- (&apos;safety_inspection&apos;, 2),
- (&apos;sale&apos;, 6),
- (&apos;school&apos;, 2),
- (&apos;school:type_idn&apos;, 30),
- (&apos;seamark:beacon_lateral:category&apos;, 20),
- (&apos;seamark:beacon_lateral:colour&apos;, 20),
- (&apos;seamark:beacon_lateral:height&apos;, 8),
- (&apos;seamark:beacon_lateral:system&apos;, 20),
- (&apos;seamark:cable_submarine:category&apos;, 6),
- (&apos;seamark:information&apos;, 6),
- (&apos;seamark:light:1:character&apos;, 4),
- (&apos;seamark:light:1:colour&apos;, 4),
- (&apos;seamark:light:1:height&apos;, 4),
- (&apos;seamark:light:1:period&apos;, 4),
- (&apos;seamark:light:1:range&apos;, 4),
- (&apos;seamark:light:1:sector_end&apos;, 4),
- (&apos;seamark:light:1:sector_start&apos;, 4),
- (&apos;seamark:light:2:character&apos;, 2),
- (&apos;seamark:light:2:colour&apos;, 2),
- (&apos;seamark:light:2:height&apos;, 2),
- (&apos;seamark:light:2:period&apos;, 2),
- (&apos;seamark:light:2:range&apos;, 2),
- (&apos;seamark:light:2:sector_end&apos;, 2),
- (&apos;seamark:light:2:sector_start&apos;, 2),
- (&apos;seamark:light:character&apos;, 28),
- (&apos;seamark:light:colour&apos;, 28),
- (&apos;seamark:light:group&apos;, 8),
- (&apos;seamark:light:height&apos;, 28),
- (&apos;seamark:light:period&apos;, 28),
- (&apos;seamark:light:range&apos;, 28),
- (&apos;seamark:light:reference&apos;, 32),
- (&apos;seamark:light:sequence&apos;, 8),
- (&apos;seamark:light_major:height&apos;, 4),
- (&apos;seamark:light_minor:height&apos;, 6),
- (&apos;seamark:name&apos;, 14),
- (&apos;seamark:platform:category&apos;, 2),
- (&apos;seamark:radar_reflector&apos;, 8),
- (&apos;seamark:radar_transponder:category&apos;, 2),
- (&apos;seamark:radar_transponder:group&apos;, 2),
- (&apos;seamark:type&apos;, 40),
- (&apos;segregated&apos;, 1836),
- (&apos;self_service&apos;, 4),
- (&apos;service&apos;, 4765),
- (&apos;service_times&apos;, 4),
- (&apos;services&apos;, 2),
- (&apos;shelter&apos;, 470),
- (&apos;shelter_tj&apos;, 417),
- (&apos;shelter_type&apos;, 1052),
- (&apos;shop&apos;, 2218),
- (&apos;shops&apos;, 2),
- (&apos;short_name&apos;, 3),
- (&apos;show_label&apos;, 332),
- (&apos;show_region&apos;, 18),
- (&apos;sidewalk&apos;, 137),
- (&apos;ski&apos;, 2),
- (&apos;sluice&apos;, 20),
- (&apos;smoking&apos;, 199),
- (&apos;smoothness&apos;, 96),
- (&apos;snowmobile&apos;, 2),
- (&apos;social_facility&apos;, 2),
- (&apos;social_facility:for&apos;, 2),
- (&apos;social_facility_for&apos;, 2),
  (&apos;source&apos;, 29848),
- (&apos;source:building&apos;, 2),
- (&apos;source:date&apos;, 560),
- (&apos;source:name&apos;, 19),
- (&apos;source:note&apos;, 8),
- (&apos;source:oneway&apos;, 4),
- (&apos;source:population&apos;, 2),
- (&apos;source_2&apos;, 3),
- (&apos;speciality&apos;, 2),
- (&apos;species&apos;, 36),
- (&apos;sport&apos;, 1136),
- (&apos;stack&apos;, 23),
- (&apos;stars&apos;, 76),
- (&apos;status milik&apos;, 2),
- (&apos;status tanah&apos;, 2),
- (&apos;stay&apos;, 6),
- (&apos;steps&apos;, 2),
- (&apos;structure&apos;, 2),
- (&apos;struktur bangunan&apos;, 2),
- (&apos;submarine&apos;, 6),
- (&apos;substation&apos;, 29),
- (&apos;supervised&apos;, 27),
- (&apos;support&apos;, 2),
- (&apos;surface&apos;, 1973),
- (&apos;surface_1&apos;, 4),
- (&apos;symbol&apos;, 2),
- (&apos;tags&apos;, 4),
- (&apos;takeaway&apos;, 34),
- (&apos;target&apos;, 2),
- (&apos;tenant&apos;, 10),
- (&apos;to&apos;, 32),
- (&apos;toilet:facilities&apos;, 946),
- (&apos;toilets&apos;, 45),
- (&apos;toilets:disposal&apos;, 14),
- (&apos;toilets:number&apos;, 776),
- (&apos;toll&apos;, 638),
- (&apos;tourism&apos;, 1063),
- (&apos;tower:type&apos;, 32),
- (&apos;tracktype&apos;, 24),
- (&apos;traffic_calming&apos;, 2),
- (&apos;trail_visibility&apos;, 6),
- (&apos;transformer&apos;, 4),
- (&apos;tree&apos;, 2),
- (&apos;trees&apos;, 47),
- (&apos;tunnel&apos;, 492),
- (&apos;turn:lanes&apos;, 8),
- (&apos;type&apos;, 4642),
- (&apos;type:id&apos;, 4693),
- (&apos;uic_ref&apos;, 2),
- (&apos;url&apos;, 20),
- (&apos;user_defined&apos;, 4),
- (&apos;vehicle&apos;, 13),
- (&apos;village_plan&apos;, 69),
- (&apos;visibility&apos;, 2),
- (&apos;voltage&apos;, 28),
- (&apos;wall:type&apos;, 4),
- (&apos;water&apos;, 373),
- (&apos;water_source&apos;, 913),
- (&apos;waterway&apos;, 3132),
- (&apos;way&apos;, 2),
- (&apos;way_area&apos;, 8),
- (&apos;website&apos;, 227),
- (&apos;wetland&apos;, 8),
- (&apos;wheelchair&apos;, 144),
- (&apos;wheelchair:description&apos;, 2),
- (&apos;width&apos;, 568),
- (&apos;wifi&apos;, 4),
- (&apos;wikidata&apos;, 10),
- (&apos;wikipedia&apos;, 140),
- (&apos;wikipedia:en&apos;, 6),
- (&apos;wikipedia:id&apos;, 131),
- (&apos;wikipedia:ru&apos;, 2),
- (&apos;wood&apos;, 131),
- (&apos;z_order&apos;, 8)]</pre>
+ (&apos;building:levels&apos;, 25345),
+ (&apos;building:roof&apos;, 25059),
+ (&apos;building:walls&apos;, 25051),
+ (&apos;amenity&apos;, 24781),
+ (&apos;building:structure&apos;, 24658),
+ (&apos;flood_prone&apos;, 21051),
+ (&apos;natural&apos;, 19025),
+ (&apos;admin_level&apos;, 17723),
+ (&apos;boundary&apos;, 15606),
+ (&apos;building:use&apos;, 15113),
+ (&apos;oneway&apos;, 12414),
+ (&apos;landuse&apos;, 12296),
+ (&apos;addr:full&apos;, 10038),
+ (&apos;kab_name&apos;, 10015),
+ (&apos;kec_name&apos;, 10004)]</pre>
 </div>
 
 </div>
@@ -1086,19 +343,149 @@ I count the number of for all tag in the document.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Looking at the tag above, we can see a lot of inconsistency, for instance some of the tag is using uppercase and the other is using lowercase. For 'name' we have 3 different tags: 'NAMA', 'Nama', and 'Name'. For province we have 'Propinsi' and 'Province'.</p>
-<p>With so many inconsistency, I focus on address, simply because I am a bit more familiar with this information and can  quickly verify them.</p>
-<p>Now for address there are three related tags: 'ALAMAT, 'addr:street', 'addr:full'.
-Both 'addr:street' and 'addr:full' is valid tag, so we can not merge them.
-<a href="http://wiki.openstreetmap.org/wiki/Key:addr">OSM wiki</a> imply that the using 'addr:street' and other supporting field is better then using 'addr:full' but our data shows that we have more 'addr:full' then 'addr:street' (10038 vs 1441).</p>
-<p>Okay let's import the data to MongoDB</p>
+<p>Looking through the data I see several tag with different case of slightly different spelling presents.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c"># Name vs Nama</span>
+<span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tag_keys</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;(name|nama)$&#39;</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(&apos;NAMA&apos;, 2), (&apos;Nama&apos;, 92), (&apos;Name&apos;, 2), (&apos;nama&apos;, 28), (&apos;name&apos;, 79005)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Province vs propinsi</span>
+<span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tag_keys</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;(province|propinsi)$&#39;</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(&apos;Propinsi&apos;, 2), (&apos;Province&apos;, 2)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Alamat vs address</span>
+<span class="nb">sorted</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tag_keys</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;(addr|alamat)&#39;</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(&apos;addr:full&apos;, 10038),
+ (&apos;addr:housenumber&apos;, 1475),
+ (&apos;addr:street&apos;, 1441),
+ (&apos;addr:city&apos;, 1057),
+ (&apos;addr:postcode&apos;, 858),
+ (&apos;addr:housename&apos;, 492),
+ (&apos;addr:country&apos;, 52),
+ (&apos;addr:province&apos;, 30),
+ (&apos;addr:district&apos;, 26),
+ (&apos;addr:suburb&apos;, 22),
+ (&apos;addr:subdistrict&apos;, 20),
+ (&apos;addr:interpolation&apos;, 16),
+ (&apos;addr:floor&apos;, 4),
+ (&apos;addr:state&apos;, 4),
+ (&apos;ALAMAT&apos;, 2),
+ (&apos;addr:county&apos;, 2),
+ (&apos;addr:housenumber_1&apos;, 2),
+ (&apos;addr:place&apos;, 2),
+ (&apos;alamat&apos;, 2)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We see for address there are three related tags: 'ALAMAT, 'addr:street', 'addr:full'.
+Both 'addr:street' and 'addr:full' is valid tag, so we can not merge them.
+<a href="http://wiki.openstreetmap.org/wiki/Key:addr">OSM wiki</a> imply that the using 'addr:street' and other supporting field is better then using 'addr:full' but our data shows that we have more 'addr:full' then 'addr:street' (10038 vs 1441).</p>
+<p>Indonesia has a bit complex administrative subdivision. It is divided as follow:</p>
+<ul>
+<li>Province</li>
+<li>Regency (Kabupaten) or City (Kota)</li>
+<li>District (Kecamatan)</li>
+<li>Village</li>
+</ul>
+<p>For Jakarta (a province), it is divided into 4 cities: Jakarta Selatan, Jakarta Utara, Jakarta Barat and Jakarta Timur.</p>
+<p>And then there are non-administrative division like RT and RW. While RT and RW is considered a non-administrative subdivision, it is widely use (The ID card has and requires this information). And from data point of view it is actually interesting to know. A RT have a maximum 30 household.</p>
+<p>The division here does not quite match the OSM address tag found here. Which allows for multiple interpretation. And given the complexity of division, not many people can fill this information easily.</p>
+<p>I believe this is what lead user to just simply put the whole address in 'addr:full', as this is much simpler. But as OSM warns, putting everything in 'addr:full' makes it harder to parse by software.</p>
+<p>There are some effort by the community to try to add the division into the data, but the result is not all that good. For instance for Regency we have 'KAB_NAME', 'kab_name', 'Kabupaten', 'kab.', etc. And some way node uses 'admin_level' tag and then put 'kabupaten' in the value.</p>
+<p>Okay let's import the data to MongoDB.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">osm_dataimporter</span> <span class="kn">import</span> <span class="n">OSMDataImporter</span>
@@ -1136,20 +523,20 @@ Both 'addr:street' and 'addr:full' is valid tag, so we can not merge them.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The problems with the address:</p>
+<h3 id="Address-prefixes-problem">Address prefixes problem<a class="anchor-link" href="#Address-prefixes-problem">&#182;</a></h3><p>The problems with the address prefixes:</p>
 <ul>
 <li>Abbreviated street names (Jl. Masjid Almunawarah, Jln Perintis, etc)</li>
 <li>Abbreviated alley names (Gg. Kembang)</li>
 </ul>
 <p>For the street name there are several variation, that is: 'jl.', 'jln.', 'jl', jln'.
-And then some use all upper case, some all lower case and some are mix.</p>
+And then some use all upper case, some all lower case and some are mixed.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Clean up street name</span>
@@ -1159,6 +546,354 @@ And then some use all upper case, some all lower case and some are mix.</p>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Address-spelling-problem">Address spelling problem<a class="anchor-link" href="#Address-spelling-problem">&#182;</a></h3><p>Several street names is actually the same, but spell out differently.
+Wikipedia has the name of most of important street in Jakarta. So I will use that as a reference.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="c"># Load wikipedia street name data</span>
+<span class="n">street_names_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;street_name.json&#39;</span><span class="p">)</span>
+<span class="n">street_names</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">street_names_file</span><span class="p">)</span>
+
+<span class="c"># Get the street names</span>
+<span class="n">flatten_street_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">street_names</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">()</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="s">&#39;osm_data_import&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To check the similarity between the reference address name with the one we have in our MongoDB, I utilize Python built-in <a href="https://docs.python.org/2/library/difflib.html">difflib</a> library. SequenceMatcher class can compare and give out ratio of similarity. We are intrested at strings that generate ratio above 0.65 and less then 1. We also ignore the prefix and the suffix like 'raya' which is common suffix for street names in Indonesia.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">difflib</span> <span class="kn">import</span> <span class="n">SequenceMatcher</span>
+
+<span class="n">closely_matched_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;way&#39;</span><span class="p">,</span> <span class="s">&#39;address.street&#39;</span><span class="p">:{</span><span class="s">&#39;$exists&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}}):</span>
+    <span class="k">for</span> <span class="n">street_name</span> <span class="ow">in</span> <span class="n">flatten_street_names</span><span class="p">:</span>
+        <span class="c"># We ignore the street prefix as this will effect the matching ratio.</span>
+        <span class="n">shorten_street_name</span> <span class="o">=</span> <span class="n">street_name</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">shorten_street_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;raya&#39;</span><span class="p">):</span>
+            <span class="n">shorten_street_name</span> <span class="o">=</span> <span class="n">shorten_street_name</span><span class="p">[:</span><span class="n">shorten_street_name</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;raya&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">item_name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;address&#39;</span><span class="p">][</span><span class="s">&#39;street&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">item_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;jalan&#39;</span><span class="p">):</span>
+            <span class="n">item_name</span> <span class="o">=</span> <span class="n">item_name</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">item_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;raya&#39;</span><span class="p">):</span>
+            <span class="n">item_name</span> <span class="o">=</span> <span class="n">item_name</span><span class="p">[:</span><span class="n">item_name</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;raya&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            
+        <span class="n">s</span> <span class="o">=</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="s">&quot; &quot;</span><span class="p">,</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">shorten_street_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="mf">0.65</span> <span class="o">&lt;=</span> <span class="n">s</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">closely_matched_names</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">street_name</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;address&#39;</span><span class="p">][</span><span class="s">&#39;street&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">.</span><span class="n">ratio</span><span class="p">(),</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">]))</span>
+
+<span class="n">closely_matched</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">closely_matched_names</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Total similiar item found: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">closely_matched</span><span class="p">)</span>
+
+<span class="c"># Display top 15 with score</span>
+<span class="p">[(</span><span class="n">reference</span><span class="p">,</span> <span class="n">found</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span> <span class="k">for</span> <span class="n">reference</span><span class="p">,</span> <span class="n">found</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">obj_id</span> <span class="ow">in</span> <span class="n">closely_matched</span><span class="p">[:</span><span class="mi">15</span><span class="p">]]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total similiar item found:  140
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(u&apos;Jalan Jenderal Ahmad Yani&apos;,
+  u&apos;Jalan Jendral Ahmad Yani&apos;,
+  0.972972972972973),
+ (u&apos;Jalan Jenderal Sudirman&apos;, u&apos;Jalan Jendral Sudirman&apos;, 0.9696969696969697),
+ (u&apos;Jalan HR Rasuna Said&apos;, u&apos;Jalan HR. Rasuna Said&apos;, 0.9655172413793104),
+ (u&apos;Jalan TB Simatupang&apos;, u&apos;TB. Simatupang&apos;, 0.9629629629629629),
+ (u&apos;Jalan TB Simatupang&apos;, u&apos;TB. Simatupang&apos;, 0.9629629629629629),
+ (u&apos;Jalan TB Simatupang&apos;, u&apos;TB. Simatupang&apos;, 0.9629629629629629),
+ (u&apos;Jalan Mampang Prapatan&apos;, u&apos;Mampang Prapatan 4&apos;, 0.9411764705882353),
+ (u&apos;Jalan Patimura&apos;, u&apos;Pattimura&apos;, 0.9411764705882353),
+ (u&apos;Jalan HR Rasuna Said&apos;, u&apos;Jalan H.R. Rasuna Said&apos;, 0.9333333333333333),
+ (u&apos;Jalan Gunung Sahari&apos;, u&apos;Gunung Sahari 4&apos;, 0.9285714285714286),
+ (u&apos;Jalan Kapten Tendean&apos;, u&apos;Kapten P. Tendean&apos;, 0.9032258064516129),
+ (u&apos;Jalan HR Rasuna Said&apos;, u&apos;Jalan H.R.Rasuna Said&apos;, 0.896551724137931),
+ (u&apos;Jalan Jenderal Gatot Subroto&apos;,
+  u&apos;Jalan Jend. Gatot Subroto&apos;,
+  0.8780487804878049),
+ (u&apos;Jalan Veteran&apos;, u&apos;Veteran 3&apos;, 0.875),
+ (u&apos;Jalan MH Thamrin&apos;, u&apos;Jalan M. H. Thamrin&apos;, 0.8695652173913043)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We still need to manually check and replace the street name, but it is a much simpler task.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">bson.objectid</span> <span class="kn">import</span> <span class="n">ObjectId</span>
+
+<span class="c"># Update similiar street names</span>
+<span class="n">similiar_names</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Ahmad Yani&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jendral Ahmad Yani&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Sudirman&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jendral Sudirman&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan HR Rasuna Said&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan HR. Rasuna Said&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan TB Simatupang&#39;</span><span class="p">,</span> <span class="s">u&#39;TB. Simatupang&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Patimura&#39;</span><span class="p">,</span> <span class="s">u&#39;Pattimura&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan HR Rasuna Said&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan H.R. Rasuna Said&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Kapten Tendean&#39;</span><span class="p">,</span> <span class="s">u&#39;Kapten P. Tendean&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan HR Rasuna Said&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan H.R.Rasuna Said&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Gatot Subroto&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jend. Gatot Subroto&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan MH Thamrin&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan M. H. Thamrin&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Abdul Syafiie&#39;</span><span class="p">,</span> <span class="s">u&quot;KH Abdul Syafi&#39;ie&quot;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Sudirman&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jend. Sudirman&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Pasar Minggu&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Raya Pasar Minggu&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Kyai Haji Wahid Hasyim&#39;</span><span class="p">,</span> <span class="s">u&#39;KH Wahid Hasyim&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Kapten Tendean&#39;</span><span class="p">,</span> <span class="s">u&#39;Kapten Pierre Tendean&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Letnan Jenderal S Parman&#39;</span><span class="p">,</span> <span class="s">u&#39;Letjen S Parman&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Kyai Haji Mas Mansyur&#39;</span><span class="p">,</span> <span class="s">u&#39;K.H. Mas Mansyur&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Letnan Jenderal MT Haryono&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Letjen M. T. Haryono&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Ahmad Yani&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Ahmad Yani&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Laksamana Yos Sudarso&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Yos Sudarso&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Insinyur Haji Juanda&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Ir. H. Juanda&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Letnan Jenderal S Parman&#39;</span><span class="p">,</span> <span class="s">u&#39;Letjend. Siswondo Parman&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Gatot Subroto&#39;</span><span class="p">,</span> <span class="s">u&#39;Gatot Soebroto&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="c"># Update address street</span>
+<span class="k">for</span> <span class="n">reference</span><span class="p">,</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">similiar_names</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update_many</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">found</span><span class="p">},</span>
+                                 <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">reference</span><span class="p">}})</span>
+    <span class="k">print</span> <span class="s">&quot;Updated for {} :&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">found</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">modified_count</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Updated for Jalan Jendral Ahmad Yani : 1
+Updated for Jalan Jendral Sudirman : 1
+Updated for Jalan HR. Rasuna Said : 1
+Updated for TB. Simatupang : 3
+Updated for Pattimura : 1
+Updated for Jalan H.R. Rasuna Said : 1
+Updated for Kapten P. Tendean : 1
+Updated for Jalan H.R.Rasuna Said : 1
+Updated for Jalan Jend. Gatot Subroto : 1
+Updated for Jalan M. H. Thamrin : 1
+Updated for KH Abdul Syafi&apos;ie : 4
+Updated for Jalan Jend. Sudirman : 2
+Updated for Jalan Raya Pasar Minggu : 1
+Updated for KH Wahid Hasyim : 10
+Updated for Kapten Pierre Tendean : 4
+Updated for Letjen S Parman : 3
+Updated for K.H. Mas Mansyur : 1
+Updated for Jalan Letjen M. T. Haryono : 4
+Updated for Jalan Ahmad Yani : 3
+Updated for Jalan Yos Sudarso : 1
+Updated for Jalan Ir. H. Juanda : 6
+Updated for Letjend. Siswondo Parman : 1
+Updated for Gatot Soebroto : 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Fix address street that has no prefix</span>
+<span class="n">no_prefix_address</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s">u&#39;Jalan Gunung Sahari&#39;</span><span class="p">,</span> <span class="s">u&#39;Gunung Sahari 4&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">u&#39;Jalan Veteran&#39;</span><span class="p">,</span> <span class="s">u&#39;Veteran 3&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">u&#39;Jalan Mampang Prapatan&#39;</span><span class="p">,</span> <span class="s">u&#39;Mampang Prapatan 4&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">reference</span><span class="p">,</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">no_prefix_address</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update_many</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">found</span><span class="p">},</span>
+                                 <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="s">&#39;Jalan {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">found</span><span class="p">)}})</span> 
+    <span class="k">print</span> <span class="s">&quot;Updated for {}:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">found</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">modified_count</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Updated for Gunung Sahari 4: 1
+Updated for Veteran 3: 1
+Updated for Mampang Prapatan 4: 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Fix address that contain house number</span>
+<span class="n">with_housenumber</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;Jalan Kyai Haji Mas Mansyur&#39;</span><span class="p">,</span> <span class="s">u&#39;KH Mas Mansyur no 57&#39;</span><span class="p">)</span>
+
+<span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">with_housenumber</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">},</span> <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">with_housenumber</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;address.housenumber&#39;</span><span class="p">:</span> <span class="mi">57</span><span class="p">}})</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{u&apos;n&apos;: 1, u&apos;nModified&apos;: 1, u&apos;ok&apos;: 1, &apos;updatedExisting&apos;: True}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Incomplete-city-problem">Incomplete city problem<a class="anchor-link" href="#Incomplete-city-problem">&#182;</a></h3><p>Now that we have normalize the street name, we can actually fill in the city for those addresses.
+However if we inspect the data closely, we see that the other area surrounding Jakarta is also included in the data set. For instance Tangerang, Bekasi and Bogor are included. Since it is common in Indonesia to use the same street name for multiple city we need to be conservative here. I will only update the city if there is already a city field and it only says starts with Jakarta. This is really only useful where the city name is uncomplete.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">reverse_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">street_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+        <span class="n">reverse_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+
+
+<span class="k">for</span> <span class="n">address</span><span class="p">,</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">reverse_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update_many</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">address</span><span class="p">,</span> <span class="s">&#39;address.city&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&#39;^jakarta&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)},</span>
+                                 <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.city&#39;</span><span class="p">:</span> <span class="n">city</span><span class="p">}})</span>
+    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">modified_count</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;Updated for {} :&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">address</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">modified_count</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Updated for Jalan Kyai Haji Wahid Hasyim : 8
+Updated for Jalan Jenderal Gatot Subroto : 1
+Updated for Jalan HR Rasuna Said : 1
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1196,7 +931,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
@@ -1212,7 +947,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Number of document</span>
@@ -1227,7 +962,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1242,7 +977,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Number of nodes</span>
@@ -1257,7 +992,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1272,7 +1007,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Number of way</span>
@@ -1287,7 +1022,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1302,7 +1037,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Number of unique user</span>
@@ -1317,7 +1052,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1332,7 +1067,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Top 10 contributing user</span>
@@ -1347,7 +1082,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1371,7 +1106,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Place of worship breakdown</span>
@@ -1390,7 +1125,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1439,7 +1174,7 @@ And then some use all upper case, some all lower case and some are mix.</p>
 
 </code></pre>
 <p>Which is great, so we have flooding information.
-But I imagine it will be difficult to manually add this information.</p>
+But, I imagine it will be difficult to manually add this information.</p>
 <p>Fortunately, Indonesian loves Twitter, and they tweet about the event everytime this happens.
 Some of the user turn on their geolocation. So we can probably use that to populate more flooding information into our data. Use Twitter API to fetch user flood information get the geolocation, (if needed use Google API to do geo reverse and add entry to OSM data) and update the data.</p>
 
@@ -1462,24 +1197,9 @@ Some of the user turn on their geolocation. So we can probably use that to popul
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Conclusion-and-Notes">Conclusion and Notes<a class="anchor-link" href="#Conclusion-and-Notes">&#182;</a></h2><p>The data we obtain from OSM is far from perfect. For the purpose of this exercise, however, I have clean up the address.</p>
-<p>Some notes:</p>
-<p>Indonesia has a bit complex administrative subdivision. It is divided as follow:</p>
-<ul>
-<li>Province</li>
-<li>Regency (Kabupaten) or City (Kota)</li>
-<li>District (Kecamatan)</li>
-<li>Village</li>
-</ul>
-<p>And then there are non-administrative division like RT and RW. While RT and RW is considered a non-administrative subdivision, it is widely use (The ID card has and requires this information). And from data point of view it is actually interesting to know. A RT have a maximum 30 household.</p>
-<p>The division here does not quite match the OSM address tag found <a href="http://wiki.openstreetmap.org/wiki/Key:addr">here</a>. Which allow for multiple interpretation.
-And given the complexity of division, not many people can fill this information easily.
-Typical user will not know the regency or district right away of the location.</p>
-<p>I believe this is what lead user to just simply put the whole address in 'addr:full', as this is much simpler.
-But as OSM warns, putting everything in 'addr:full' makes it harder to parse by software.</p>
-<p>There are some effort by the community to try to add the division into the data, but the result is not all that good. 
-For instance for Regency we have 'KAB_NAME', 'Kabupaten', 'kab.', etc. And some way node uses 'admin_level' tag and then put 'kabupaten' in the value.</p>
-<p>I believe the community need to come out with a convention to write the correct address down,
-and a way to convince the rest of community member to follow this convention.</p>
+<p>I wish I could clean the full address ('address.full' key) a bit, but there is no format, which makes it really painful to parse.</p>
+<p>Capitalization is also a problem in the data set. But I can not find the list of address to be the reference. We can simply perform capitilization on the address but I don't think this is accurate. For instance one of the address is 'kh mas mansyur' which we can not immediately capitalize to 'Kh Mas Mansyur' as the correct capitalization is 'KH Mas Mansyur'.</p>
+<p>The data set also includes surrounding city like Tangerang, Bekasi, Bogor, etc. So a better name for the dataset will be <a href="https://en.wikipedia.org/wiki/Greater_Jakarta">Greater Jakarta</a>.</p>
 
 </div>
 </div>
