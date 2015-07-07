@@ -1,0 +1,40 @@
+{
+    "Jakarta Pusat" : [
+        "Jalan Diponegoro", "Jalan Gajah Mada", "Jalan Gunung Sahari", "Jalan Haji Benyamin Sueb", 
+        "Jalan Hayam Wuruk", "Jalan HBR Motik", "Jalan HOS Cokroaminoto", "Jalan HR Rasuna Said", "Jalan Imam Bonjol", 
+        "Jalan Industri", "Jalan Insinyur Haji Juanda", "Jalan Jenderal Ahmad Yani", "Jalan Jenderal Gatot Subroto", 
+        "Jalan Jenderal Sudirman", "Jalan Kyai Haji Mas Mansyur", "Jalan Kyai Haji Wahid Hasyim", "Jalan Kramat Raya", 
+        "Jalan Laksamana Yos Sudarso", "Jalan Letnan Jenderal Suprapto", "Jalan Medan Merdeka", "Jalan MH Thamrin", 
+        "Jalan Pangeran Jayakarta", "Jalan Salemba Raya", "Jalan Senen Raya", "Jalan Veteran"],
+
+    "Jakarta Barat": [
+        "Jalan Arjuna", "Jalan Daan Mogot", "Jalan Gajah Mada", "Jalan Hayam Wuruk", "Jalan Kapuk Raya", 
+        "Jalan Kyai Tapa", "Jalan Letnan Jenderal S Parman", "Jalan Pangeran Tubagus Angke", "Jalan Panjang Raya",
+        "Jalan Pintu Besar", "Jalan Tomang Raya"],
+
+    "Jakarta Selatan":[
+        "Jalan Abdul Syafiie", "Jalan Asia Afrika", "Jalan Casablanca", "Jalan Ciledug Raya", "Jalan Ciputat Raya",
+        "Jalan Dokter Suharjo", "Jalan Fatmawati", "Jalan HR Rasuna Said", "Jalan Insinyur Haji Juanda",
+        "Jalan Jenderal Gatot Subroto", "Jalan Jenderal Sudirman", "Jalan Kapten Tendean", "Jalan Lenteng Agung",
+        "Jalan Letnan Jenderal MT Haryono", "Jalan Letnan Jenderal Soepomo", "Jalan Mampang Prapatan",
+        "Jalan Metro Pondok Indah", "Jalan Pangeran Antasari", "Jalan Panglima Polim", "Jalan Pasar Minggu",
+        "Jalan Patimura", "Jalan Prapanca", "Jalan Profesor Dokter Satrio", "Jalan Raden Ajeng Kartini",
+        "Jalan Senopati", "Jalan Sisingamangaraja", "Jalan Sultan Agung", "Jalan Sultan Hasanuddin",
+        "Jalan Sultan Iskandar Muda", "Jalan Sultan Iskandarsyah", "Jalan TB Simatupang", "Jalan Trunojoyo",
+        "Jalan Wolter Monginsidi"],
+
+    "Jakarta Timur": [
+        "Jalan Bekasi Raya Jalan Dewi Sartika", "Jalan I Gusti Ngurahrai", "Jalan Jatinegara", 
+        "Jalan Jenderal Ahmad Yani", "Jalan Jenderal Basuki Rachmat", "Jalan Kalimalang", 
+        "Jalan Letnan Jenderal MT Haryono", "Jalan DI Panjaitan", "Jalan Mayor Jenderal Sutoyo", 
+        "Jalan Otto Iskandardinata", "Jalan Pemuda", "Jalan Perintis Kemerdekaan", "Jalan Pondok Gede Raya", 
+        "Jalan Pramuka", "Jalan Raya Bogor"],
+
+    "Jakarta Utara": [
+        "Jalan Danau Sunter", "Jalan Enggano", "Jalan Gunung Sahari", "Jalan Haji Benyamin Sueb", 
+        "Jalan HBR Motik", "Jalan Industri", "Jalan Jembatan Dua", "Jalan Jembatan Tiga", 
+        "Jalan Laksamana Yos Sudarso", "Jalan Mangga Dua", "Jalan Pangeran Tubagus Angke", 
+        "Jalan Pluit Selatan Raya", "Jalan RE Martadinata", "Jalan Sunter Kemayoran"]
+}
+
+
