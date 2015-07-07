@@ -343,7 +343,10 @@ I count the number of for all tag in the document.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Looking through the data I see several tag with different case of slightly different spelling presents.</p>
+<p>Looking through the data I see several things.</p>
+<p>There are only a handful usage of postal code total of 900. This is not suprising, since in Indonesia we don't use this postal code that much.</p>
+<p>The other things is the use of phone. This is a bit suprising for me, there are only a handful entry for this (total of 212.</p>
+<p>And then tag with different case of slightly different spelling presents.</p>
 
 </div>
 </div>
@@ -615,6 +618,7 @@ Wikipedia has the name of most of important street in Jakarta. So I will use tha
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">difflib</span> <span class="kn">import</span> <span class="n">SequenceMatcher</span>
 
+<span class="c"># Audit street names</span>
 <span class="n">closely_matched_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;way&#39;</span><span class="p">,</span> <span class="s">&#39;address.street&#39;</span><span class="p">:{</span><span class="s">&#39;$exists&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}}):</span>
     <span class="k">for</span> <span class="n">street_name</span> <span class="ow">in</span> <span class="n">flatten_street_names</span><span class="p">:</span>
@@ -690,7 +694,8 @@ Wikipedia has the name of most of important street in Jakarta. So I will use tha
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We still need to manually check and replace the street name, but it is a much simpler task.</p>
+<p>We still need to manually check and replace the street name, but it is a much simpler task.
+After manually looking at the result, I found several item that can actually be updated in the database.</p>
 
 </div>
 </div>
@@ -702,7 +707,7 @@ Wikipedia has the name of most of important street in Jakarta. So I will use tha
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">bson.objectid</span> <span class="kn">import</span> <span class="n">ObjectId</span>
 
-<span class="c"># Update similiar street names</span>
+<span class="c"># Clean up similiar street names</span>
 <span class="n">similiar_names</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Ahmad Yani&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jendral Ahmad Yani&#39;</span><span class="p">),</span>
   <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Sudirman&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jendral Sudirman&#39;</span><span class="p">),</span>
@@ -869,7 +874,9 @@ However if we inspect the data closely, we see that the other area surrounding J
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
         <span class="n">reverse_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
 
+<span class="c"># Audit number of address that have a city </span>
 
+<span class="c"># Add city whenever possible</span>
 <span class="k">for</span> <span class="n">address</span><span class="p">,</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">reverse_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update_many</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">address</span><span class="p">,</span> <span class="s">&#39;address.city&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&#39;^jakarta&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)},</span>
                                  <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.city&#39;</span><span class="p">:</span> <span class="n">city</span><span class="p">}})</span>
@@ -897,6 +904,39 @@ Updated for Jalan HR Rasuna Said : 1
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Overuse-of-addr:full-tag">Overuse of addr:full tag<a class="anchor-link" href="#Overuse-of-addr:full-tag">&#182;</a></h3><p>Unfortunately most of the the address is in the addr:full tag instead of addr:street (4515 vs 461). 
+If we run:</p>
+<div class="highlight"><pre><span class="n">address_full</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s">&#39;address.full&#39;</span><span class="p">:{</span><span class="s">&#39;$exists&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}},</span> <span class="p">{</span><span class="s">&#39;address.full&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;_id&#39;</span><span class="p">:</span><span class="mi">0</span> <span class="p">}))</span>
+</pre></div>
+<p>And inspect the output there are a lot of variations.</p>
+<ul>
+<li><p>RT RW only no street name, example:</p>
+<ul>
+<li>RT 002 RW 08</li>
+<li>RT 0014 RW 010</li>
+</ul>
+</li>
+<li><p>Street name with RT no RW, example:</p>
+<ul>
+<li>Jalan sumur batu raya, Rt 07/01</li>
+</ul>
+</li>
+<li><p>Street name with house number, example:</p>
+<ul>
+<li>Jalan Medan Merdeka Barat No. 12</li>
+<li>Jalan Kartini 8 dalam no 18</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
