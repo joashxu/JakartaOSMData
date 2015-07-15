@@ -8,10 +8,9 @@ import itertools
 from difflib import SequenceMatcher
 
 
-class OSMDataDescriptor(object):
+class OSMDataAuditor(object):
     '''
-    OSMDataDescriptor.
-    Simple class to summarize OSM data.
+    This class summarize and audit OSM Data.
     '''
 
     def __init__(self, filename):
@@ -110,10 +109,26 @@ class OSMDataDescriptor(object):
                         s = SequenceMatcher(lambda x: x == " ", street_name, ref_street_name)
 
                         # Check the ratio between the two stings.
-                        # 0.6 is considered a close match,
+                        # 0.6 is considered a close match, I choose 0.65
                         # 1 means the two strings match exactly.
                         # We want ratio that is between the two.
                         if 0.65 <= s.ratio() < 1.0:
                             closely_matched_names.add((ref_street_name, street_name, s.ratio()))
 
-        return closely_matched_names
+        return
+
+    def audit_city(self):
+        ''' Get unique city name.
+        '''
+        city_list = set()
+        for event, element in ET.iterparse(self.filename, events=('start',)):
+            # Only pay attention to 'way' tag
+            if not element.tag == 'way':
+                continue
+
+            for el in element.iter('tag'):
+                for el in element.iter('tag'):
+                    if el.attrib['k'] == 'addr:city':
+                        city_list.add(el.attrib['v'].lower())
+
+        return city_list
