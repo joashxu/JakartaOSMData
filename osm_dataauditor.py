@@ -115,7 +115,7 @@ class OSMDataAuditor(object):
                         if 0.65 <= s.ratio() < 1.0:
                             closely_matched_names.add((ref_street_name, street_name, s.ratio()))
 
-        return
+        return closely_matched_names
 
     def audit_city(self):
         ''' Get unique city name.
