@@ -208,9 +208,9 @@ I then run some code to get the feel of the data.</p>
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">osm_datadescriptor</span> <span class="kn">import</span> <span class="n">OSMDataDescriptor</span> 
+<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">osm_dataauditor</span> <span class="kn">import</span> <span class="n">OSMDataAuditor</span>
 
-<span class="n">osm_data</span> <span class="o">=</span> <span class="n">OSMDataDescriptor</span><span class="p">(</span><span class="s">&#39;jakarta_indonesia.osm&#39;</span><span class="p">)</span>
+<span class="n">osm_data</span> <span class="o">=</span> <span class="n">OSMDataAuditor</span><span class="p">(</span><span class="s">&#39;jakarta_indonesia.osm&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -261,7 +261,7 @@ I then run some code to get the feel of the data.</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>OSM allows a very flexible tagging system, which gives user freedom but causing problem with consistency.
-I count the number of for all tag in the document.</p>
+I count the number for all tag in the document.</p>
 
 </div>
 </div>
@@ -285,7 +285,7 @@ I count the number of for all tag in the document.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Below I list the top 20 tag keys. As the whole list will be too exhaustive to read.</p>
+<p>Below I list the top 20 tag keys sorted descending, as the whole list will be too exhaustive to read.</p>
 
 </div>
 </div>
@@ -343,10 +343,15 @@ I count the number of for all tag in the document.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Looking through the data I see several things.</p>
-<p>There are only a handful usage of postal code total of 900. This is not suprising, since in Indonesia we don't use this postal code that much.</p>
-<p>The other things is the use of phone. This is a bit suprising for me, there are only a handful entry for this (total of 212.</p>
-<p>And then tag with different case of slightly different spelling presents.</p>
+<p>Looking through the data I see several things:</p>
+<ul>
+<li>There are only a handful usage of postal code, total of 900. This is not suprising, since in Indonesia we don't use this postal code that much.</li>
+<li>There are only a handful entry for telephone, total of 212.</li>
+<li>There are quite numerous flood_prone tag, 21000+.</li>
+<li>Many of the tags are actually duplicate.</li>
+<li>Etc.</li>
+</ul>
+<p>On the topic of duplicate tags, below I show several tag that has similar names.</p>
 
 </div>
 </div>
@@ -358,7 +363,7 @@ I count the number of for all tag in the document.</p>
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">import</span> <span class="nn">re</span>
 
-<span class="c"># Name vs Nama</span>
+<span class="c"># Name vs Nama (Nama is Indonesian for Name)</span>
 <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tag_keys</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;(name|nama)$&#39;</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)]</span>
 </pre></div>
 
@@ -388,7 +393,7 @@ I count the number of for all tag in the document.</p>
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># Province vs propinsi</span>
+<div class=" highlight hl-ipython2"><pre><span class="c"># Province vs propinsi (Propinsi is Indonesian for Province)</span>
 <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tag_keys</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;(province|propinsi)$&#39;</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)]</span>
 </pre></div>
 
@@ -418,7 +423,7 @@ I count the number of for all tag in the document.</p>
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># Alamat vs address</span>
+<div class=" highlight hl-ipython2"><pre><span class="c"># Alamat vs address, (Alamat is Indonesian for address)</span>
 <span class="nb">sorted</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tag_keys</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;(addr|alamat)&#39;</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 
@@ -477,30 +482,13 @@ Both 'addr:street' and 'addr:full' is valid tag, so we can not merge them.
 <li>Village</li>
 </ul>
 <p>For Jakarta (a province), it is divided into 4 cities: Jakarta Selatan, Jakarta Utara, Jakarta Barat and Jakarta Timur.</p>
-<p>And then there are non-administrative division like RT and RW. While RT and RW is considered a non-administrative subdivision, it is widely use (The ID card has and requires this information). And from data point of view it is actually interesting to know. A RT have a maximum 30 household.</p>
-<p>The division here does not quite match the OSM address tag found here. Which allows for multiple interpretation. And given the complexity of division, not many people can fill this information easily.</p>
-<p>I believe this is what lead user to just simply put the whole address in 'addr:full', as this is much simpler. But as OSM warns, putting everything in 'addr:full' makes it harder to parse by software.</p>
-<p>There are some effort by the community to try to add the division into the data, but the result is not all that good. For instance for Regency we have 'KAB_NAME', 'kab_name', 'Kabupaten', 'kab.', etc. And some way node uses 'admin_level' tag and then put 'kabupaten' in the value.</p>
-<p>Okay let's import the data to MongoDB.</p>
+<p>And then there are non-administrative division like RT and RW. While RT and RW is considered a non-administrative subdivision, it is widely use (The ID card has and requires this information).</p>
+<p>I believe this is what lead user to just simply put the whole address in 'addr:full', as this is much simpler. 
+Separating it into different bits is often difficult and it does not actually matched OSM address tag (it does not have things like 'Kabupaten' or 'Kecamatan'). But as OSM warns, putting everything in 'addr:full' makes it harder to parse by software.</p>
+<p>There are some effort by the community to try to add the division into the data, but the result is not consistent. For instance for Regency we have 'KAB_NAME', 'kab_name', 'Kabupaten', 'kab.', etc. And some way node uses 'admin_level' tag and then put 'kabupaten' in the value.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">osm_dataimporter</span> <span class="kn">import</span> <span class="n">OSMDataImporter</span>
-
-<span class="n">importer</span> <span class="o">=</span> <span class="n">OSMDataImporter</span><span class="p">(</span><span class="n">db_name</span><span class="o">=</span><span class="s">&#39;osm_data_import&#39;</span><span class="p">,</span> <span class="n">db_collection_name</span><span class="o">=</span><span class="s">&#39;jakarta&#39;</span><span class="p">)</span>
-<span class="n">importer</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span><span class="s">&#39;jakarta_indonesia.osm&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -539,16 +527,98 @@ And then some use all upper case, some all lower case and some are mixed.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># Clean up street name</span>
-<span class="n">importer</span><span class="o">.</span><span class="n">cleanup_address_street</span><span class="p">()</span>
-<span class="c"># Clean up street alley</span>
-<span class="n">importer</span><span class="o">.</span><span class="n">cleanup_address_alley</span><span class="p">()</span>
+<div class=" highlight hl-ipython2"><pre><span class="n">abbreviated_st</span> <span class="o">=</span> <span class="n">osm_data</span><span class="o">.</span><span class="n">audit_abbreviated_street_prefixes</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;Total abbreviated street names:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">abbreviated_st</span><span class="p">)</span>
+
+<span class="c"># Print the first 10 rows</span>
+<span class="n">abbreviated_st</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total abbreviated street names: 2041
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&apos;Jl. Patra Kuningan&apos;,
+ &apos;Jl. HR. Rasuna Said Blok X-5 Kav. 5-9&apos;,
+ &apos;Jl Alteri Permata Hijau&apos;,
+ &apos;Jl. Bojana Tirta&apos;,
+ &apos;jl taman ratu indah&apos;,
+ &apos;Jl Danau Sunter&apos;,
+ &apos;Jl Raya Bogor&apos;,
+ &apos;Jl. Raya Bogor Rt 008/02&apos;,
+ &apos;Jl. Raya Bogor Km 20&apos;,
+ &apos;Jl. Raya Bogor&apos;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">abbreviated_alley</span> <span class="o">=</span> <span class="n">osm_data</span><span class="o">.</span><span class="n">audit_abbreviated_alley_prefixes</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;Total abbreviated alley names:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">abbreviated_alley</span><span class="p">)</span>
+
+<span class="c"># Print the first 10 rows</span>
+<span class="n">abbreviated_alley</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total abbreviated alley names: 18
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&apos;Gg. 3 Blok R&apos;,
+ &apos;Gg. Kembang Sepatu (dari arah Jl. Rawa Selatan)&apos;,
+ &apos;Gg Kwista Rt 03 Rw 05&apos;,
+ &apos;Gg 6 Rt 06 Rw 04&apos;,
+ &apos;Gg Kwista Rt 01 Rw 05&apos;,
+ &apos;Gg Rawa Tengah Rt 02 rw 07&apos;,
+ &apos;Gg. Panca Marga&apos;,
+ &apos;Gg. Sepakat&apos;,
+ &apos;Gg. Lontar RT 008 RW 006&apos;,
+ &apos;Gg. Trikora RT 005 RW 005&apos;]</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -564,43 +634,6 @@ Wikipedia has the name of most of important street in Jakarta. So I will use tha
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-
-<span class="c"># Load wikipedia street name data</span>
-<span class="n">street_names_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;street_name.json&#39;</span><span class="p">)</span>
-<span class="n">street_names</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">street_names_file</span><span class="p">)</span>
-
-<span class="c"># Get the street names</span>
-<span class="n">flatten_street_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">street_names</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">()</span>
-<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="s">&#39;osm_data_import&#39;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -613,34 +646,85 @@ Wikipedia has the name of most of important street in Jakarta. So I will use tha
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">closely_matched</span> <span class="o">=</span> <span class="n">osm_data</span><span class="o">.</span><span class="n">audit_address_similar_names</span><span class="p">()</span>
+<span class="n">closely_matched</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">closely_matched</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;Total similiar item found: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">closely_matched</span><span class="p">)</span>
+
+<span class="c"># Display top 10 with score</span>
+<span class="p">[(</span><span class="n">reference</span><span class="p">,</span> <span class="n">found</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span> <span class="k">for</span> <span class="n">reference</span><span class="p">,</span> <span class="n">found</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">closely_matched</span><span class="p">[:</span><span class="mi">10</span><span class="p">]]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total similiar item found:  295
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(u&apos;jalan jenderal sudirman&apos;, &apos;jalan jendral sudirman&apos;, 0.9777777777777777),
+ (u&apos;jalan kramat raya&apos;, &apos;jalan kamal raya&apos;, 0.9090909090909091),
+ (u&apos;jalan jenderal gatot subroto&apos;,
+  &apos;jalan jend. gatot subroto&apos;,
+  0.9056603773584906),
+ (u&apos;jalan hr rasuna said&apos;, &apos;jl hr. rasuna said&apos;, 0.8947368421052632),
+ (u&apos;jalan hr rasuna said&apos;, &apos;jl. hr rasuna said&apos;, 0.8947368421052632),
+ (u&apos;jalan jenderal ahmad yani&apos;, &apos;jl. jendral ahmad yani&apos;, 0.8936170212765957),
+ (u&apos;jalan senen raya&apos;, &apos;jalan menteng raya&apos;, 0.8823529411764706),
+ (u&apos;jalan pasar minggu&apos;, &apos;jalan raya pasar minggu&apos;, 0.8780487804878049),
+ (u&apos;jalan raya bogor&apos;, &apos;jl. raya bogor&apos;, 0.8666666666666667),
+ (u&apos;jalan jembatan dua&apos;, &apos;jalan jembatan batu&apos;, 0.8648648648648649)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We still need to manually check and replace the street name, but it is a much simpler task.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Incomplete-and-incorrect-city-problem">Incomplete and incorrect city problem<a class="anchor-link" href="#Incomplete-and-incorrect-city-problem">&#182;</a></h3><p>Since I am using the reference from Wikipedia which contain group streets by cities. I can probably update the city information using this reference as well. First let's audit the city information.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">difflib</span> <span class="kn">import</span> <span class="n">SequenceMatcher</span>
+<div class=" highlight hl-ipython2"><pre><span class="n">city_names</span> <span class="o">=</span> <span class="n">osm_data</span><span class="o">.</span><span class="n">audit_city</span><span class="p">()</span>
 
-<span class="c"># Audit street names</span>
-<span class="n">closely_matched_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;way&#39;</span><span class="p">,</span> <span class="s">&#39;address.street&#39;</span><span class="p">:{</span><span class="s">&#39;$exists&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}}):</span>
-    <span class="k">for</span> <span class="n">street_name</span> <span class="ow">in</span> <span class="n">flatten_street_names</span><span class="p">:</span>
-        <span class="c"># We ignore the street prefix as this will effect the matching ratio.</span>
-        <span class="n">shorten_street_name</span> <span class="o">=</span> <span class="n">street_name</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">shorten_street_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;raya&#39;</span><span class="p">):</span>
-            <span class="n">shorten_street_name</span> <span class="o">=</span> <span class="n">shorten_street_name</span><span class="p">[:</span><span class="n">shorten_street_name</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;raya&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="n">item_name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;address&#39;</span><span class="p">][</span><span class="s">&#39;street&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">item_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;jalan&#39;</span><span class="p">):</span>
-            <span class="n">item_name</span> <span class="o">=</span> <span class="n">item_name</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
-        <span class="k">if</span> <span class="n">item_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;raya&#39;</span><span class="p">):</span>
-            <span class="n">item_name</span> <span class="o">=</span> <span class="n">item_name</span><span class="p">[:</span><span class="n">item_name</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;raya&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-            
-        <span class="n">s</span> <span class="o">=</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="s">&quot; &quot;</span><span class="p">,</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">shorten_street_name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="mf">0.65</span> <span class="o">&lt;=</span> <span class="n">s</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
-            <span class="n">closely_matched_names</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">street_name</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;address&#39;</span><span class="p">][</span><span class="s">&#39;street&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">.</span><span class="n">ratio</span><span class="p">(),</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">]))</span>
-
-<span class="n">closely_matched</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">closely_matched_names</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">print</span> <span class="s">&quot;Total similiar item found: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">closely_matched</span><span class="p">)</span>
-
-<span class="c"># Display top 15 with score</span>
-<span class="p">[(</span><span class="n">reference</span><span class="p">,</span> <span class="n">found</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span> <span class="k">for</span> <span class="n">reference</span><span class="p">,</span> <span class="n">found</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">obj_id</span> <span class="ow">in</span> <span class="n">closely_matched</span><span class="p">[:</span><span class="mi">15</span><span class="p">]]</span>
+<span class="k">print</span> <span class="s">&quot;Different city names: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">city_names</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -653,36 +737,9 @@ Wikipedia has the name of most of important street in Jakarta. So I will use tha
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Total similiar item found:  140
+<pre>Different city names:  44
 </pre>
 </div>
-</div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[(u&apos;Jalan Jenderal Ahmad Yani&apos;,
-  u&apos;Jalan Jendral Ahmad Yani&apos;,
-  0.972972972972973),
- (u&apos;Jalan Jenderal Sudirman&apos;, u&apos;Jalan Jendral Sudirman&apos;, 0.9696969696969697),
- (u&apos;Jalan HR Rasuna Said&apos;, u&apos;Jalan HR. Rasuna Said&apos;, 0.9655172413793104),
- (u&apos;Jalan TB Simatupang&apos;, u&apos;TB. Simatupang&apos;, 0.9629629629629629),
- (u&apos;Jalan TB Simatupang&apos;, u&apos;TB. Simatupang&apos;, 0.9629629629629629),
- (u&apos;Jalan TB Simatupang&apos;, u&apos;TB. Simatupang&apos;, 0.9629629629629629),
- (u&apos;Jalan Mampang Prapatan&apos;, u&apos;Mampang Prapatan 4&apos;, 0.9411764705882353),
- (u&apos;Jalan Patimura&apos;, u&apos;Pattimura&apos;, 0.9411764705882353),
- (u&apos;Jalan HR Rasuna Said&apos;, u&apos;Jalan H.R. Rasuna Said&apos;, 0.9333333333333333),
- (u&apos;Jalan Gunung Sahari&apos;, u&apos;Gunung Sahari 4&apos;, 0.9285714285714286),
- (u&apos;Jalan Kapten Tendean&apos;, u&apos;Kapten P. Tendean&apos;, 0.9032258064516129),
- (u&apos;Jalan HR Rasuna Said&apos;, u&apos;Jalan H.R.Rasuna Said&apos;, 0.896551724137931),
- (u&apos;Jalan Jenderal Gatot Subroto&apos;,
-  u&apos;Jalan Jend. Gatot Subroto&apos;,
-  0.8780487804878049),
- (u&apos;Jalan Veteran&apos;, u&apos;Veteran 3&apos;, 0.875),
- (u&apos;Jalan MH Thamrin&apos;, u&apos;Jalan M. H. Thamrin&apos;, 0.8695652173913043)]</pre>
-</div>
-
 </div>
 
 </div>
@@ -694,216 +751,12 @@ Wikipedia has the name of most of important street in Jakarta. So I will use tha
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We still need to manually check and replace the street name, but it is a much simpler task.
-After manually looking at the result, I found several item that can actually be updated in the database.</p>
+<p>There are 44 unique different names for city, after looking at the result, many of them are invalid.
+Some only have Jakarta as the listed city, what is surprising though is that there are cities from the surroundings area as well. For instance Tangerang, Bekasi and Bogor are included.</p>
+<p>Since it is common in Indonesia to use the same street name for multiple city we need to be conservative here. I will only update the city if there is already a city field and it only says 'Jakarta'.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">bson.objectid</span> <span class="kn">import</span> <span class="n">ObjectId</span>
-
-<span class="c"># Clean up similiar street names</span>
-<span class="n">similiar_names</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Ahmad Yani&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jendral Ahmad Yani&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Sudirman&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jendral Sudirman&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan HR Rasuna Said&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan HR. Rasuna Said&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan TB Simatupang&#39;</span><span class="p">,</span> <span class="s">u&#39;TB. Simatupang&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Patimura&#39;</span><span class="p">,</span> <span class="s">u&#39;Pattimura&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan HR Rasuna Said&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan H.R. Rasuna Said&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Kapten Tendean&#39;</span><span class="p">,</span> <span class="s">u&#39;Kapten P. Tendean&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan HR Rasuna Said&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan H.R.Rasuna Said&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Gatot Subroto&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jend. Gatot Subroto&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan MH Thamrin&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan M. H. Thamrin&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Abdul Syafiie&#39;</span><span class="p">,</span> <span class="s">u&quot;KH Abdul Syafi&#39;ie&quot;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Sudirman&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Jend. Sudirman&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Pasar Minggu&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Raya Pasar Minggu&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Kyai Haji Wahid Hasyim&#39;</span><span class="p">,</span> <span class="s">u&#39;KH Wahid Hasyim&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Kapten Tendean&#39;</span><span class="p">,</span> <span class="s">u&#39;Kapten Pierre Tendean&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Letnan Jenderal S Parman&#39;</span><span class="p">,</span> <span class="s">u&#39;Letjen S Parman&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Kyai Haji Mas Mansyur&#39;</span><span class="p">,</span> <span class="s">u&#39;K.H. Mas Mansyur&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Letnan Jenderal MT Haryono&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Letjen M. T. Haryono&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Ahmad Yani&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Ahmad Yani&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Laksamana Yos Sudarso&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Yos Sudarso&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Insinyur Haji Juanda&#39;</span><span class="p">,</span> <span class="s">u&#39;Jalan Ir. H. Juanda&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Letnan Jenderal S Parman&#39;</span><span class="p">,</span> <span class="s">u&#39;Letjend. Siswondo Parman&#39;</span><span class="p">),</span>
-  <span class="p">(</span><span class="s">u&#39;Jalan Jenderal Gatot Subroto&#39;</span><span class="p">,</span> <span class="s">u&#39;Gatot Soebroto&#39;</span><span class="p">),</span>
-<span class="p">]</span>
-
-<span class="c"># Update address street</span>
-<span class="k">for</span> <span class="n">reference</span><span class="p">,</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">similiar_names</span><span class="p">:</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update_many</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">found</span><span class="p">},</span>
-                                 <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">reference</span><span class="p">}})</span>
-    <span class="k">print</span> <span class="s">&quot;Updated for {} :&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">found</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">modified_count</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Updated for Jalan Jendral Ahmad Yani : 1
-Updated for Jalan Jendral Sudirman : 1
-Updated for Jalan HR. Rasuna Said : 1
-Updated for TB. Simatupang : 3
-Updated for Pattimura : 1
-Updated for Jalan H.R. Rasuna Said : 1
-Updated for Kapten P. Tendean : 1
-Updated for Jalan H.R.Rasuna Said : 1
-Updated for Jalan Jend. Gatot Subroto : 1
-Updated for Jalan M. H. Thamrin : 1
-Updated for KH Abdul Syafi&apos;ie : 4
-Updated for Jalan Jend. Sudirman : 2
-Updated for Jalan Raya Pasar Minggu : 1
-Updated for KH Wahid Hasyim : 10
-Updated for Kapten Pierre Tendean : 4
-Updated for Letjen S Parman : 3
-Updated for K.H. Mas Mansyur : 1
-Updated for Jalan Letjen M. T. Haryono : 4
-Updated for Jalan Ahmad Yani : 3
-Updated for Jalan Yos Sudarso : 1
-Updated for Jalan Ir. H. Juanda : 6
-Updated for Letjend. Siswondo Parman : 1
-Updated for Gatot Soebroto : 1
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># Fix address street that has no prefix</span>
-<span class="n">no_prefix_address</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s">u&#39;Jalan Gunung Sahari&#39;</span><span class="p">,</span> <span class="s">u&#39;Gunung Sahari 4&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">u&#39;Jalan Veteran&#39;</span><span class="p">,</span> <span class="s">u&#39;Veteran 3&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">u&#39;Jalan Mampang Prapatan&#39;</span><span class="p">,</span> <span class="s">u&#39;Mampang Prapatan 4&#39;</span><span class="p">)</span>
-<span class="p">]</span>
-
-<span class="k">for</span> <span class="n">reference</span><span class="p">,</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">no_prefix_address</span><span class="p">:</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update_many</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">found</span><span class="p">},</span>
-                                 <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="s">&#39;Jalan {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">found</span><span class="p">)}})</span> 
-    <span class="k">print</span> <span class="s">&quot;Updated for {}:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">found</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">modified_count</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Updated for Gunung Sahari 4: 1
-Updated for Veteran 3: 1
-Updated for Mampang Prapatan 4: 1
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># Fix address that contain house number</span>
-<span class="n">with_housenumber</span> <span class="o">=</span> <span class="p">(</span><span class="s">u&#39;Jalan Kyai Haji Mas Mansyur&#39;</span><span class="p">,</span> <span class="s">u&#39;KH Mas Mansyur no 57&#39;</span><span class="p">)</span>
-
-<span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">with_housenumber</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">},</span> <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">with_housenumber</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;address.housenumber&#39;</span><span class="p">:</span> <span class="mi">57</span><span class="p">}})</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{u&apos;n&apos;: 1, u&apos;nModified&apos;: 1, u&apos;ok&apos;: 1, &apos;updatedExisting&apos;: True}</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Incomplete-city-problem">Incomplete city problem<a class="anchor-link" href="#Incomplete-city-problem">&#182;</a></h3><p>Now that we have normalize the street name, we can actually fill in the city for those addresses.
-However if we inspect the data closely, we see that the other area surrounding Jakarta is also included in the data set. For instance Tangerang, Bekasi and Bogor are included. Since it is common in Indonesia to use the same street name for multiple city we need to be conservative here. I will only update the city if there is already a city field and it only says starts with Jakarta. This is really only useful where the city name is uncomplete.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">reverse_dict</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">street_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
-        <span class="n">reverse_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
-
-<span class="c"># Audit number of address that have a city </span>
-
-<span class="c"># Add city whenever possible</span>
-<span class="k">for</span> <span class="n">address</span><span class="p">,</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">reverse_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">update_many</span><span class="p">({</span><span class="s">&#39;address.street&#39;</span><span class="p">:</span> <span class="n">address</span><span class="p">,</span> <span class="s">&#39;address.city&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&#39;^jakarta&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)},</span>
-                                 <span class="p">{</span><span class="s">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;address.city&#39;</span><span class="p">:</span> <span class="n">city</span><span class="p">}})</span>
-    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">modified_count</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&quot;Updated for {} :&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">address</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">modified_count</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Updated for Jalan Kyai Haji Wahid Hasyim : 8
-Updated for Jalan Jenderal Gatot Subroto : 1
-Updated for Jalan HR Rasuna Said : 1
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -911,10 +764,7 @@ Updated for Jalan HR Rasuna Said : 1
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Overuse-of-addr:full-tag">Overuse of addr:full tag<a class="anchor-link" href="#Overuse-of-addr:full-tag">&#182;</a></h3><p>Unfortunately most of the the address is in the addr:full tag instead of addr:street (4515 vs 461). 
-If we run:</p>
-<div class="highlight"><pre><span class="n">address_full</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">jakarta</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s">&#39;address.full&#39;</span><span class="p">:{</span><span class="s">&#39;$exists&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}},</span> <span class="p">{</span><span class="s">&#39;address.full&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;_id&#39;</span><span class="p">:</span><span class="mi">0</span> <span class="p">}))</span>
-</pre></div>
-<p>And inspect the output there are a lot of variations.</p>
+Looking through the content of the addr:full, we can see several variation.</p>
 <ul>
 <li><p>RT RW only no street name, example:</p>
 <ul>
@@ -933,7 +783,10 @@ If we run:</p>
 <li>Jalan Kartini 8 dalam no 18</li>
 </ul>
 </li>
+<li><p>etc.</p>
+</li>
 </ul>
+<p>I won't be cleaning addr:full further (other then the prefixes fix) on this project but I think I need to address this here.</p>
 
 </div>
 </div>
@@ -964,14 +817,15 @@ If we run:</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This section contains basic statistics about the dataset and the MongoDB queries used to gather them.</p>
 <p>File sizes:</p>
-<p>jakarta_indonesia.osm ......... 449.2 MB</p>
+<p>jakarta_indonesia.osm ......... 449.2 MB
+jakarta_indonesia.osm.json .... 524.3 MB</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
@@ -987,7 +841,7 @@ If we run:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Number of document</span>
@@ -1002,7 +856,7 @@ If we run:</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1017,7 +871,7 @@ If we run:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Number of nodes</span>
@@ -1032,7 +886,7 @@ If we run:</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1047,7 +901,7 @@ If we run:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Number of way</span>
@@ -1062,7 +916,7 @@ If we run:</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1077,7 +931,7 @@ If we run:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Number of unique user</span>
@@ -1092,7 +946,7 @@ If we run:</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1107,7 +961,7 @@ If we run:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Top 10 contributing user</span>
@@ -1122,7 +976,7 @@ If we run:</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1146,7 +1000,7 @@ If we run:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Place of worship breakdown</span>
@@ -1165,7 +1019,7 @@ If we run:</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1198,7 +1052,7 @@ If we run:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Additional-ideas">Additional ideas<a class="anchor-link" href="#Additional-ideas">&#182;</a></h2><p>Jakarta experience flooding issue every year. There is this cycle the citizen believe, small flood every year and a big one every 5 years.</p>
+<h2 id="Additional-ideas">Additional ideas<a class="anchor-link" href="#Additional-ideas">&#182;</a></h2><p>Jakarta experience flooding issue every year. There is this cycle the citizen believe take place, small flood every year and a big one every 5 years.</p>
 <p>Looking at the tag list, I saw this:</p>
 
 <pre><code>('flood:overflow', 2619),
@@ -1216,7 +1070,7 @@ If we run:</p>
 <p>Which is great, so we have flooding information.
 But, I imagine it will be difficult to manually add this information.</p>
 <p>Fortunately, Indonesian loves Twitter, and they tweet about the event everytime this happens.
-Some of the user turn on their geolocation. So we can probably use that to populate more flooding information into our data. Use Twitter API to fetch user flood information get the geolocation, (if needed use Google API to do geo reverse and add entry to OSM data) and update the data.</p>
+Some of the user turn on their geolocation. So we can probably use that to populate more flooding information into our data. Use Twitter API to fetch user flood information, get the geolocation, if needed use Google API to do geo reverse and add entry to OSM data and update the data.</p>
 
 </div>
 </div>
@@ -1236,8 +1090,8 @@ Some of the user turn on their geolocation. So we can probably use that to popul
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion-and-Notes">Conclusion and Notes<a class="anchor-link" href="#Conclusion-and-Notes">&#182;</a></h2><p>The data we obtain from OSM is far from perfect. For the purpose of this exercise, however, I have clean up the address.</p>
-<p>I wish I could clean the full address ('address.full' key) a bit, but there is no format, which makes it really painful to parse.</p>
+<h2 id="Conclusion-and-Notes">Conclusion and Notes<a class="anchor-link" href="#Conclusion-and-Notes">&#182;</a></h2><p>The data I obtain from OSM is far from perfect. For the purpose of this exercise, however, I have clean up the address.</p>
+<p>I wish I could clean the full address ('address.full' key) a bit, but it is in free format, which makes it really painful to parse.</p>
 <p>Capitalization is also a problem in the data set. But I can not find the list of address to be the reference. We can simply perform capitilization on the address but I don't think this is accurate. For instance one of the address is 'kh mas mansyur' which we can not immediately capitalize to 'Kh Mas Mansyur' as the correct capitalization is 'KH Mas Mansyur'.</p>
 <p>The data set also includes surrounding city like Tangerang, Bekasi, Bogor, etc. So a better name for the dataset will be <a href="https://en.wikipedia.org/wiki/Greater_Jakarta">Greater Jakarta</a>.</p>
 
